@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Card</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .id-card {
+            width: 350px;
+            height: 500px;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            background-image: url("{{ url_for('static', filename='img/icard-background.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            margin: 0 auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 14px;
+            position: relative;
+            color: #000;
+        }
+
+        .id-card .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        .id-card h3 {
+            font-size: 18px;
+            margin: 15px 0 5px 0;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .details {
+            text-align: left;
+            font-size: 14px;
+            margin-top: 20px;
+            color: #000;
+        }
+
+        .details p {
+            margin: 6px 0;
+        }
+
+        .barcode-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 30px;  /* Adjusted to avoid overlap */
+        }
+
+        .barcode {
+            width: 90%;
+            max-width: 200px;  /* Adjusted size */
+            height: auto;
+            background-color: #fff;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .create-pdf-btn, .back-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+
+        .create-pdf-btn:hover, .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .back-btn {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="id-card" id="card">
+            <img src="{{ url_for('static', filename='uploads/' + photo) }}" alt="Profile Photo" class="profile-img">
+            <h3>{{ name }}</h3>
+            <p>{{ role or "Student" }}</p>
+            
+            <div class="details">
+                <p><strong>Father's Name:</strong> {{ father_name }}</p>
+                <p><strong>ID Number:</strong> {{ id_number }}</p>
+                <p><strong>Roll Number:</strong> {{ roll_number }}</p>
+                <p><strong>Center:</strong> {{ center }}</p>
+                <p><strong>City:</strong> {{ city }}</p>
+                <p><strong>Campus:</strong> {{ campus }}</p>
+                <p><strong>Batch ID:</strong> {{ batch_id }}</p>
+            </div>
+
+            <div class="barcode-container">
+                <a href="https://example.com/" target="_blank">
+                    <img src="{{ url_for('static', filename='img/Barcode.jpg') }}" alt="Barcode" class="barcode">
+                </a>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="create-pdf-btn" onclick="generatePDF()">Create PDF</button>
+            <button class="back-btn" onclick="window.history.back();">Back</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('card');
+            const options = {
+                margin: 0.5,
+                filename: 'id-card.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: [8.5, 11], orientation: 'portrait' }
+            };
+            html2pdf().from(element).set(options).save();
+        }
+    </script>
+</body>
+</html>
