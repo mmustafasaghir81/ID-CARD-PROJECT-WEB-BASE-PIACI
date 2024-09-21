@@ -70,7 +70,6 @@ Follow the steps below to set up and run the project locally.
     ```
 
 ---
-
 ## 📂 Project Folder Structure
 
 ```bash
@@ -86,7 +85,57 @@ id_card_project/
 ├── app.py                     # Main Flask application file
 └── README.md                  # Project documentation
 # 📇 ID Card Generation Project
+```
+---
+
+# 📁 Static Folder Explanation
+
+- **static/img/**: This folder stores all static images, including the **ID card background** and the **barcode image**.
+- **static/uploads/**: This folder will hold the **uploaded profile photos** from users.
+
+**Note**: Make sure to create the `static/` folder with the above sub-folders before running the project. The **img** folder should contain required images like the **ID card background**, and the **uploads** folder will handle dynamically uploaded images.
 
 
+# 📝 Template Explanation
 
+- **id_form.html**: This is the form where users enter their details like **name**, **role**, **center**, **batch ID**, and upload their **profile photo**.
+- **id_card.html**: This template generates the final ID card, displaying the user's information dynamically, along with the **barcode** and uploaded photo.
+
+# ⚡ How to Use the Application
+
+1. Open the application on your local server.
+2. Fill in the form with your details: **Name**, **Father's Name**, **ID number**, **Roll number**, **Campus**, **Batch ID**, etc.
+3. Upload a profile photo to be included on the ID card.
+4. Click **Submit** to generate the ID card.
+5. Once the card is generated, you can download it as a PDF by clicking the **"Create PDF"** button.
+
+# 📦 Dependencies
+
+The project uses the following Python packages, which can be installed via pip:
+
+- **Flask**: For serving the web pages.
+- **html2pdf.js**: For generating the downloadable PDF file of the ID card.
+
+# 📑 Useful Links
+
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Bootstrap Documentation](https://getbootstrap.com/)
+- [html2pdf.js Documentation](https://github.com/ephremme/html2pdf.js)
+
+# 📧 Contact
+
+If you have any questions or suggestions, feel free to reach out:
+
+- **GitHub**: mmustafasaghir81
+- **Email**: akifsaghirai@gmail.com
+
+# 🔗 Useful Links
+
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Python Official Website](https://www.python.org/)
+- [html2pdf.js GitHub](https://github.com/ephremme/html2pdf.js)
+
+# 🎉 Screenshots
+
+Example of a generated ID card with profile photo, barcode, and user details.
 
